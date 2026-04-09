@@ -1,5 +1,6 @@
 def show_inventory(inventory):
     print("\nCurrent Inventory:")
+    # Corrección: usar .items()
     for fruit, stock in inventory.items():
         print(f"{fruit}: {stock}")
     print()
@@ -11,14 +12,17 @@ def add_fruit(inventory):
         print(f"{fruit} already exists!\n")
     else:
         stock = input(f"Enter stock for {fruit}: ")
+        # Corrección: usar = en lugar de ==
         inventory[fruit] = int(stock)
         print(f"{fruit} added with stock {stock}.\n")
 
 
 def update_stock(inventory):
     fruit = input("Enter the name of the fruit to update: ").strip()
+    # Corrección: verificar en el diccionario, no en .items()
     if fruit in inventory:
         amount = input(f"Enter amount to add to {fruit}'s stock: ")
+        # Corrección: convertir a entero
         inventory[fruit] += int(amount)
         print(f"{fruit} stock increased by {amount}.\n")
     else:
@@ -34,8 +38,32 @@ def menu():
 
 
 def run_program():
+    # Corrección: faltaban comas
     inventory = {
         "apples": 10,
         "bananas": 20,
         "oranges": 15
     }
+
+    # FREEZE CODE BEGIN
+    print("Welcome to the Fruit Shop!\n")
+
+    while True:
+        menu()
+        choice = input("Enter option number: ")
+
+        if choice == "1":
+            show_inventory(inventory)
+        elif choice == "2":
+            add_fruit(inventory)
+        elif choice == "3":
+            update_stock(inventory)
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid option. Please choose 1, 2, 3, or 4.\n")
+  
+if __name__ == "__main__":
+    run_program()
+    # FREEZE CODE END
